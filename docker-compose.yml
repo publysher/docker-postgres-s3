@@ -40,6 +40,24 @@ services:
       POSTGRES_USER: target_user
       POSTGRES_PASSWORD: target_pass
 
+  # postgres-s3 can read from arbitrary S3 files
+  postgres-s3-target:
+    build: postgres-s3
+    links:
+      - "target-db:database"    # target database should always be called `database`
+      - "fake-s3:fake-s3"  # we fake the endpoint
+    environment:
+      POSTGRES_DB: target
+      POSTGRES_USER: target_user
+      POSTGRES_PASSWORD: target_pass
+
+      S3_BUCKET: s3://backup.bucket
+      S3_ENDPOINT: http://fake-s3:4569
+      S3_FILE: source.pgdump
+      AWS_ACCESS_KEY_ID: FAKE
+      AWS_SECRET_ACCESS_KEY: ALSO_FAKE
+      PG_RESTORE_ARGS: --no-acl --no-owner
+
   # fake-s3 is a fake S3 provider so we can test for free
   fake-s3:
     image: lphoward/fake-s3
@@ -59,3 +77,4 @@ services:
       - "target-db:target-db"
       - "fake-s3:fake-s3"
       - "postgres-s3:postgres-s3"
+      - "postgres-s3-target:postgres-s3-target"

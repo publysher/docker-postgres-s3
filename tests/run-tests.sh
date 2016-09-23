@@ -20,7 +20,8 @@ wait_for() {
 wait_for source-db 5432 "source database"
 wait_for target-db 5432 "target database"
 wait_for fake-s3 4569 "S3 provider"
-wait_for postgres-s3 8000 "backup/restore service"
+wait_for postgres-s3 8000 "backup/restore service (source database)"
+wait_for postgres-s3-target 8000 "backup/restore service (target database)"
 wait_for source-db 5432 "source database"       # run twice, because the postgres image does quite some restarting
 
 exec /usr/local/bin/roundup

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BashSupportProjectSettings">
+    <option name="globalVariables">
+      <set>
+        <option value="POSTGRES_DB" />
+        <option value="POSTGRES_PASSWORD" />
+        <option value="POSTGRES_USER" />
+        <option value="S3_BUCKET" />
+        <option value="S3_ENDPOINT" />
+      </set>
+    </option>
+  </component>
+</project>

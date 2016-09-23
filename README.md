@@ -24,6 +24,7 @@ This project solves the following problems:
 | `S3_FILE` | No | Name of the S3 file. Defaults to `${POSTGRES_DB}.pgdump` |
 | `AWS_ACCESS_KEY_ID` | Yes | AWS Access key. For uploads, requires write permissions on the bucket. |
 | `AWS_SECRET_ACCESS_KEY` | Yes | AWS Secret key. | 
+| `PG_RESTORE_ARGS` | No | Extra arguments to pass to `pg_restore`. | 
 | ---| --- | --- |
 
 

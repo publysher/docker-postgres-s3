@@ -22,6 +22,7 @@ it_creates_a_backup_after_a_specific_post() {
 
 it_can_restore_a_backup() {
     # create some data
+    source_sql "DROP TABLE IF EXISTS test_restore"
     source_sql "CREATE TABLE IF NOT EXISTS test_restore ( name VARCHAR(20) PRIMARY KEY )"
     source_sql "INSERT INTO test_restore (name) VALUES ('postgres-s3')"
     test $(source_sql "SELECT COUNT(*) FROM test_restore") = "1"
@@ -37,4 +38,24 @@ it_can_restore_a_backup() {
 
     # data should be back!
     test $(source_sql "SELECT COUNT(*) FROM test_restore") = "1"
+}
+
+it_can_restore_a_backup_to_a_different_server() {
+    # create some data
+    source_sql "DROP TABLE IF EXISTS test_restore"
+    source_sql "CREATE TABLE IF NOT EXISTS test_restore ( name VARCHAR(20) PRIMARY KEY )"
+    source_sql "INSERT INTO test_restore (name) VALUES ('postgres-s3')"
+    test $(source_sql "SELECT COUNT(*) FROM test_restore") = "1"
+
+    # ensure absence on target
+    target_sql "DROP TABLE IF EXISTS test_restore"
+
+    # run backup
+    curl -s --fail -X POST http://postgres-s3:8000/backup
+
+    # restore on different machine
+    curl -s --fail -X POST http://postgres-s3-target:8000/restore
+
+    # data should now be present on target
+    test $(target_sql "SELECT COUNT(*) FROM test_restore") = "1"
 }
