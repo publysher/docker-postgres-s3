@@ -3,18 +3,22 @@ FROM alpine:latest
 WORKDIR /app/
 ENV ROUNDUP_VERSION v0.0.5
 
-RUN apk --no-cache add \
+RUN apk update \
+    && apk add \
+        'py-pip' \
         'curl' \
         'ncurses' \
         'postgresql-client<9.6' \
-    && apk --no-cache add --virtual buildDeps \
+    && apk add --virtual buildDeps \
         'make' \
     && curl -L https://github.com/bmizerany/roundup/tarball/${ROUNDUP_VERSION} | tar xvzf - \
     && cd bmizerany-roundup-*  && ./configure && make && make install && cd .. \
     && rm -r bmizerany-roundup-* \
-    && apk del buildDeps
+    && apk del buildDeps \
+    && rm -rf /var/cache/apk/* \
+    && pip install awscli
 
-ADD *.sh /app/
+COPY *.sh /app/
 
 CMD ["/app/run-tests.sh"]
 

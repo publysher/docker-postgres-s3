@@ -3,9 +3,11 @@ MAINTAINER "Yigal Duppen" <yigal@publysher.nl>
 
 WORKDIR /app/
 EXPOSE 8000
+STOPSIGNAL SIGINT
+HEALTHCHECK CMD ["/app/check-health.sh"]
 
 RUN adduser -S service
 USER service
-ADD * /app/
+COPY * /app/
 
-CMD ["python", "app.py"]
+ENTRYPOINT ["python", "app.py"]

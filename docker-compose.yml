@@ -47,3 +47,4 @@ services:
       - "target-db:target-db"
       - "fake-s3:fake-s3"
       - "postgres-s3:postgres-s3"
+      - "fake-s3:s3.amazon.com"
