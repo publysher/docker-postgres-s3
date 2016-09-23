@@ -15,6 +15,9 @@ DISPATCHERS = {
     },
     '/backup/': {
         'POST': os.path.join(BASE_DIR, 'create-backup.sh'),
+    },
+    '/restore/': {
+        'POST': os.path.join(BASE_DIR, 'restore.sh'),
     }
 }
 

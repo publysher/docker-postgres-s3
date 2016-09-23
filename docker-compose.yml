@@ -19,6 +19,18 @@ services:
   # postgres-s3 is the basic backup/restore tool for source-db
   postgres-s3:
     build: postgres-s3
+    links:
+      - "source-db:database"    # target database should always be called `database`
+      - "fake-s3:fake-s3"  # we fake the endpoint
+    environment:
+      POSTGRES_DB: source
+      POSTGRES_USER: source_user
+      POSTGRES_PASSWORD: source_pass
+
+      S3_BUCKET: s3://backup.bucket
+      S3_ENDPOINT: http://fake-s3:4569    # See http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region for a list of valid endpoints
+      AWS_ACCESS_KEY_ID: FAKE
+      AWS_SECRET_ACCESS_KEY: ALSO_FAKE
 
   # target-db is an empty database we want to restore to
   target-db:
@@ -47,4 +59,3 @@ services:
       - "target-db:target-db"
       - "fake-s3:fake-s3"
       - "postgres-s3:postgres-s3"
-      - "fake-s3:s3.amazon.com"

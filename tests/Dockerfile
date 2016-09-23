@@ -5,10 +5,10 @@ ENV ROUNDUP_VERSION v0.0.5
 
 RUN apk update \
     && apk add \
-        'py-pip' \
         'curl' \
         'ncurses' \
         'postgresql-client<9.6' \
+        'py-pip' \
     && apk add --virtual buildDeps \
         'make' \
     && curl -L https://github.com/bmizerany/roundup/tarball/${ROUNDUP_VERSION} | tar xvzf - \

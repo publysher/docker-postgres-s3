@@ -10,5 +10,5 @@ tearDown() {
 trap tearDown EXIT
 
 docker-compose build 
-docker-compose run --rm tests
+docker-compose run --rm tests || docker-compose logs postgres-s3
 
