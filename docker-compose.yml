@@ -16,6 +16,10 @@ services:
       POSTGRES_USER: source_user
       POSTGRES_PASSWORD: source_pass
 
+  # postgres-s3 is the basic backup/restore tool for source-db
+  postgres-s3:
+    build: postgres-s3
+
   # target-db is an empty database we want to restore to
   target-db:
     image: postgres:9.5
@@ -42,3 +46,4 @@ services:
       - "source-db:source-db"
       - "target-db:target-db"
       - "fake-s3:fake-s3"
+      - "postgres-s3:postgres-s3"
