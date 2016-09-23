@@ -11,10 +11,34 @@ services:
   # source-db is the 'master' database.
   source-db:
     image: postgres:9.5
+    environment:
+      POSTGRES_DB: source
+      POSTGRES_USER: source_user
+      POSTGRES_PASSWORD: source_pass
 
   # target-db is an empty database we want to restore to
   target-db:
     image: postgres:9.5
+    environment:
+      POSTGRES_DB: target
+      POSTGRES_USER: target_user
+      POSTGRES_PASSWORD: target_pass
 
+  # fake-s3 is a fake S3 provider so we can test for free
+  fake-s3:
+    image: lphoward/fake-s3
+
+  # the tests container contains Roundup tests
   tests:
     build: ./tests
+    environment:
+      SOURCE_DB: source
+      SOURCE_USER: source_user
+      SOURCE_PASSWORD: source_pass
+      TARGET_DB: target
+      TARGET_USER: target_user
+      TARGET_PASSWORD: target_pass
+    links:
+      - "source-db:source-db"
+      - "target-db:target-db"
+      - "fake-s3:fake-s3"

@@ -1,7 +1,18 @@
 FROM alpine:latest
 
-RUN apk add --update 'postgresql-client<9.6'  \
-    && rm -rf /var/cache/apk
+WORKDIR /app/
+ENV ROUNDUP_VERSION v0.0.5
+
+RUN apk --no-cache add \
+        ncurses \
+        'postgresql-client<9.6' \
+    && apk --no-cache add --virtual buildDeps \
+        curl \
+        make \
+    && curl -L https://github.com/bmizerany/roundup/tarball/${ROUNDUP_VERSION} | tar xvzf - \
+    && cd bmizerany-roundup-*  && ./configure && make && make install && cd .. \
+    && rm -r bmizerany-roundup-* \
+    && apk del buildDeps
 
 ADD *.sh /app/
 
