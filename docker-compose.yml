@@ -1,0 +1,20 @@
+---
+
+# This docker-compose file has two purposes:
+# - it shows how to create a postgres-s3 container
+# - it provides regression tests
+
+version: "2"
+
+services:
+
+  # source-db is the 'master' database.
+  source-db:
+    image: postgres:9.5
+
+  # target-db is an empty database we want to restore to
+  target-db:
+    image: postgres:9.5
+
+  tests:
+    build: ./tests
