@@ -33,6 +33,7 @@ running on port 8000, with the following endpoints:
 | `POSTGRES_USER` | No, defaults to the value of `POSTGRES_DB` | Name of the Postgres user to connect as. |
 | `POSTGRES_PASSWORD` | Yes | Password to use when connecting to the database. |
 | `S3_ENDPOINT` | Yes | S3 endpoint to use when connecting. See http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region for a list of valid endpoints. |
+| `S3_REGION` | Yes | S3 region containing the bucket |
 | `S3_BUCKET` | Yes | Name of the S3 bucket to store the database dump | 
 | `S3_FILE` | No | Name of the S3 file. Defaults to `${POSTGRES_DB}.pgdump` |
 | `AWS_ACCESS_KEY_ID` | Yes | AWS Access key. For uploads, requires write permissions on the bucket. |
@@ -65,6 +66,7 @@ services:
     environment:
       POSTGRES_PASSWORD: password
       S3_ENDPOINT: "https://s3.amazonaws.com"
+      S3_REGION: "us-east-1"
       S3_BUCKET: "s3://my-bucket"
       AWS_ACCESS_KEY_ID: "access-key"
       AWS_SECRET_ACCESS_KEY: "secret"
@@ -85,6 +87,7 @@ services:
       POSTGRES_USER: my_user
       POSTGRES_PASSWORD: password
       S3_ENDPOINT: "https://s3.amazonaws.com"
+      S3_REGION: "us-east-1"
       S3_BUCKET: "s3://my-bucket"
       AWS_ACCESS_KEY_ID: "access-key"
       AWS_SECRET_ACCESS_KEY: "secret"

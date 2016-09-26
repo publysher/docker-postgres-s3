@@ -29,6 +29,7 @@ services:
 
       S3_BUCKET: s3://backup.bucket
       S3_ENDPOINT: http://fake-s3:4569    # See http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region for a list of valid endpoints
+      S3_REGION: eu-central-1
       AWS_ACCESS_KEY_ID: FAKE
       AWS_SECRET_ACCESS_KEY: ALSO_FAKE
 
@@ -53,6 +54,7 @@ services:
 
       S3_BUCKET: s3://backup.bucket
       S3_ENDPOINT: http://fake-s3:4569
+      S3_REGION: eu-central-1
       S3_FILE: source.pgdump
       AWS_ACCESS_KEY_ID: FAKE
       AWS_SECRET_ACCESS_KEY: ALSO_FAKE
