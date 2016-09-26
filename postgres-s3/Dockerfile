@@ -12,7 +12,7 @@ LABEL   org.label-schema.schema-version="1.0" \
         org.label-schema.url="https://github.com/publysher/docker-postgres-s3/" \
         org.label-schema.vcs-url="https://github.com/publysher/docker-postgres-s3" \
         org.label-schema.vendor="Publysher BV" \
-        org.label-schema.docker.dockerfile="./postgres-s3/Dockerfile" \
+        org.label-schema.docker.dockerfile="./postgres-s3/Dockerfile"
 
 RUN apk update \
     && apk add \

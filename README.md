@@ -1,9 +1,9 @@
+[![Docker Automated build](https://img.shields.io/docker/automated/publysher/postgres-s3.svg)](https://hub.docker.com/r/publysher/automated-badger/) 
+[![](https://images.microbadger.com/badges/image/publysher/postgres-s3.svg)](http://microbadger.com/images/publysher/automated-badger "Get your own image badge on microbadger.com")
+
 # docker-postgres-s3
 
 A Docker-based solution for Postgres backups/restores on Amazon S3.
-
-[![Docker Automated build](https://img.shields.io/docker/automated/publysher/postgres-s3.svg)](https://hub.docker.com/r/publysher/automated-badger/)
-[![](https://images.microbadger.com/badges/image/publysher/postgres-s3.svg)](http://microbadger.com/images/publysher/automated-badger "Get your own image badge on microbadger.com")
 
 ## Goals
 
