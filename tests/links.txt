@@ -1,0 +1,6 @@
+source-db 5432
+target-db 5432
+fake-s3 4569
+postgres-s3 8000
+postgres-s3-target 8000
+source-db 5432
