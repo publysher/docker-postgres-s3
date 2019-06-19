@@ -1,5 +1,5 @@
-#!/usr/bin/env sh
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+#!/usr/bin/env bash
 set -e
 set -u
 
